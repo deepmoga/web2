@@ -100,11 +100,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CollegesController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\College.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\dbcontext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,6 +121,11 @@
     <Content Include="Views\Countries\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Colleges\Create.cshtml" />
+    <Content Include="Views\Colleges\Delete.cshtml" />
+    <Content Include="Views\Colleges\Details.cshtml" />
+    <Content Include="Views\Colleges\Edit.cshtml" />
+    <Content Include="Views\Colleges\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
