@@ -7,5 +7,9 @@ namespace visa.Models
 {
     public class dbcontext :DbContext
     {
+        public dbcontext() : base("dbcontext")
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<dbcontext, visa.Migrations.Configuration>("dbcontext"));
+        }
     }
 }

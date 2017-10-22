@@ -19,3 +19,25 @@ F:\New git\web2\visa\visa\bin\System.Web.Helpers.xml
 F:\New git\web2\visa\visa\bin\System.Web.Mvc.xml
 F:\New git\web2\visa\visa\obj\Debug\visa.dll
 F:\New git\web2\visa\visa\obj\Debug\visa.pdb
+D:\git\Latest\web2\visa\visa\bin\visa.dll.config
+D:\git\Latest\web2\visa\visa\bin\visa.dll
+D:\git\Latest\web2\visa\visa\bin\visa.pdb
+D:\git\Latest\web2\visa\visa\bin\EntityFramework.dll
+D:\git\Latest\web2\visa\visa\bin\EntityFramework.SqlServer.dll
+D:\git\Latest\web2\visa\visa\bin\Microsoft.Web.Infrastructure.dll
+D:\git\Latest\web2\visa\visa\bin\System.Web.Helpers.dll
+D:\git\Latest\web2\visa\visa\bin\System.Web.Mvc.dll
+D:\git\Latest\web2\visa\visa\bin\System.Web.Razor.dll
+D:\git\Latest\web2\visa\visa\bin\System.Web.Webpages.Deployment.dll
+D:\git\Latest\web2\visa\visa\bin\System.Web.Webpages.dll
+D:\git\Latest\web2\visa\visa\bin\System.Web.Webpages.Razor.dll
+D:\git\Latest\web2\visa\visa\bin\EntityFramework.xml
+D:\git\Latest\web2\visa\visa\bin\EntityFramework.SqlServer.xml
+D:\git\Latest\web2\visa\visa\bin\System.Web.Razor.xml
+D:\git\Latest\web2\visa\visa\bin\System.Web.Webpages.xml
+D:\git\Latest\web2\visa\visa\bin\System.Web.Webpages.Deployment.xml
+D:\git\Latest\web2\visa\visa\bin\System.Web.Webpages.Razor.xml
+D:\git\Latest\web2\visa\visa\bin\System.Web.Helpers.xml
+D:\git\Latest\web2\visa\visa\bin\System.Web.Mvc.xml
+D:\git\Latest\web2\visa\visa\obj\Debug\visa.dll
+D:\git\Latest\web2\visa\visa\obj\Debug\visa.pdb
