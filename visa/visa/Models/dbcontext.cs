@@ -11,5 +11,7 @@ namespace visa.Models
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<dbcontext, visa.Migrations.Configuration>("dbcontext"));
         }
+
+        public System.Data.Entity.DbSet<visa.Models.Country> Countries { get; set; }
     }
 }
