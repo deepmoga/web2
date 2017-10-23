@@ -102,6 +102,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CollegesController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\PreFormsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -109,6 +110,7 @@
     <Compile Include="Models\College.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\dbcontext.cs" />
+    <Compile Include="Models\PreForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +128,11 @@
     <Content Include="Views\Colleges\Details.cshtml" />
     <Content Include="Views\Colleges\Edit.cshtml" />
     <Content Include="Views\Colleges\Index.cshtml" />
+    <Content Include="Views\PreForms\Create.cshtml" />
+    <Content Include="Views\PreForms\Delete.cshtml" />
+    <Content Include="Views\PreForms\Details.cshtml" />
+    <Content Include="Views\PreForms\Edit.cshtml" />
+    <Content Include="Views\PreForms\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -151,7 +158,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1985</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

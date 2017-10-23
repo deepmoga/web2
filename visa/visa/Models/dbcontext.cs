@@ -15,5 +15,7 @@ namespace visa.Models
         public System.Data.Entity.DbSet<visa.Models.Country> Countries { get; set; }
 
         public System.Data.Entity.DbSet<visa.Models.College> Colleges { get; set; }
+
+        public System.Data.Entity.DbSet<visa.Models.PreForm> PreForms { get; set; }
     }
 }

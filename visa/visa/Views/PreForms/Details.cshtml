@@ -1,0 +1,203 @@
+﻿@model visa.Models.PreForm
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PreForm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerialNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Religion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Religion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dateofbirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dateofbirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthCertificate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthCertificate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Passport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Passport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NationalId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NationalId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ielts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ielts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tofel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tofel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrefCountry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrefCountry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrefCollege)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrefCollege)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrefSubject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrefSubject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sponsorship)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sponsorship)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SponsorshipType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SponsorshipType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefferedName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefferedName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
