@@ -43,8 +43,21 @@ namespace visa.Models
         public string SponsorshipType { get; set; }
         public string RefferedName { get; set; }
         public string Comments { get; set; }
-
-
+        
 
     }
+    public enum Relegion
+    {
+        Hindu,
+        Sikh,
+        Muslim
+    }
+    public enum BirthC
+    {
+        Yes,No
+    }
+    public enum scolar
+    { yes,no}
+
+
 }

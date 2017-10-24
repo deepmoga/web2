@@ -1,5 +1,5 @@
 ﻿@model visa.Models.PreForm
-
+@using visa.Models
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -51,7 +51,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Religion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Religion, new { htmlAttributes = new { @class = "form-control" } })
+              @Html.DropDownList("StudentGender",
+                    new SelectList(Enum.GetValues(typeof(visa.Models.Relegion))),
+                    "Select Relegion",
+                    new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Religion, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -91,7 +94,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BirthCertificate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BirthCertificate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("SelectCertificate",
+                    new SelectList(Enum.GetValues(typeof(visa.Models.BirthC))),
+                    "Select Certificate",
+                    new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BirthCertificate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -171,7 +177,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Sponsorship, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Sponsorship, new { htmlAttributes = new { @class = "form-control" } })
+              @Html.DropDownList("ScholarShip",
+                    new SelectList(Enum.GetValues(typeof(visa.Models.scolar))),
+                    "Select ScholarShip",
+                    new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Sponsorship, "", new { @class = "text-danger" })
             </div>
         </div>
