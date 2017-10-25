@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using visa.Models;
+using System.Web.Script.Serialization;
 
 namespace visa.Controllers
 {
@@ -123,6 +124,15 @@ namespace visa.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Pop(string stateID)
+        {
+            List<PreForm> lstcity = new List<PreForm>();
+            int id = Convert.ToInt32(stateID);
+            lstcity = (db.PreForms.Where(x => x.id == id)).ToList();
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            string result = javaScriptSerializer.Serialize(lstcity);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

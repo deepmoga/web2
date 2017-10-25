@@ -1,8 +1,14 @@
 ﻿@model IEnumerable<visa.Models.PreForm>
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{  
+    var a ="";
+    var fname ="";
+    var id ="";
 }
 
 <h2>Index</h2>
@@ -33,54 +39,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ContactNo)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nationality)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dateofbirth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BirthCertificate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Passport)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NationalId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ielts)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tofel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrefCountry)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrefCollege)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrefSubject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sponsorship)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SponsorshipType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RefferedName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comments)
-        </th>
+        
         <th></th>
     </tr>
 
@@ -106,61 +65,102 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ContactNo)
+            <input id="hfid" type="hidden" value="@item.id" />
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nationality)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dateofbirth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BirthCertificate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Passport)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NationalId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ielts)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tofel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrefCountry)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrefCollege)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrefSubject)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sponsorship)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SponsorshipType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RefferedName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comments)
-        </td>
+        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Delete", "Delete", new { id=item.id }) |
+            <a  onclick="ShowPopUp();">Change Status</a>
         </td>
     </tr>
 }
 
 </table>
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Tool Gallery</h4>
+                    </div>
+                    
+                    <div class="modal-body clearfix">
+                        
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Serial No</label>
+                                <input id="Text1" class="form-control" type="text" value='@id'/>
+                            </div>
+                            <div class="form-group">
+                               <label>Student Name</label>
+                                <input id="Text1" class="form-control" type="text" value='@a' readonly="True"/>
+                                </div>
+                            <div class="form-group">
+                                <label>Father Name</label>
+                                <input id="Text1" class="form-control" type="text" value='@fname' readonly="True"/>
+                            </div>
+                          
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+        function ShowPopUp() {
+            
+            var id = $("#hfid").val();
+            var options = { "backdrop": "static", keyboard: true };
+            var url = '/Home/Pop';
+            $.ajax
+           ({
+               url: '/PreForms/Pop',
+               type: 'POST',
+               datatype: 'application/json',
+               contentType: 'application/json',
+               data: JSON.stringify({
+                   stateId: +id
+               }),
+               success: function (result) {
+                   debugger;
+                  
+                  
+                   $('#myModal').modal(options);
+                   $('#myModal').modal('show');
+                   $.each($.parseJSON(result), function (i, city) {
+                       debugger;
+                       a = city.StudentName;
+                       fname = city.FatherName;
+                       id = city.SerialNo;
+
+                   })
+                   
+
+               },
+               error: function () {
+                   alert("Whooaaa! Something went wrong..")
+               },
+
+
+
+
+
+           });
+            $("#closbtn").click(function () {
+                $('#myModal').modal('show');
+            });
+        };
+
+</script>
