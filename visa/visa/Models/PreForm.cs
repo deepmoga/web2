@@ -23,6 +23,9 @@ namespace visa.Models
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
 
         public string ContactNo { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Required (ErrorMessage ="Please Enter Email Address For Updates")]
+        public string Email { get; set; }
         public string Nationality { get; set; }
         public string Dateofbirth { get; set; }
         public string BirthCertificate { get; set; }

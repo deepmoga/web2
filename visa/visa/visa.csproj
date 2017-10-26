@@ -116,11 +116,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Countries\Create.cshtml" />
-    <Content Include="Views\Countries\Delete.cshtml" />
-    <Content Include="Views\Countries\Details.cshtml" />
-    <Content Include="Views\Countries\Edit.cshtml" />
-    <Content Include="Views\Countries\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Colleges\Create.cshtml" />
@@ -133,6 +128,11 @@
     <Content Include="Views\PreForms\Details.cshtml" />
     <Content Include="Views\PreForms\Edit.cshtml" />
     <Content Include="Views\PreForms\Index.cshtml" />
+    <Content Include="Views\Countries\Create.cshtml" />
+    <Content Include="Views\Countries\Delete.cshtml" />
+    <Content Include="Views\Countries\Details.cshtml" />
+    <Content Include="Views\Countries\Edit.cshtml" />
+    <Content Include="Views\Countries\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

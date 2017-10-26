@@ -48,13 +48,25 @@ namespace visa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,SerialNo,StudentName,FatherName,MotherName,Religion,Address,ContactNo,Nationality,Dateofbirth,BirthCertificate,Passport,NationalId,Ielts,Sat,Tofel,Gre,PrefCountry,PrefCollege,PrefSubject,Sponsorship,SponsorshipType,RefferedName,Comments")] PreForm preForm)
+        public async Task<ActionResult> Create([Bind(Include = "id,SerialNo,StudentName,FatherName,MotherName,Religion,Address,ContactNo,Email,Nationality,Dateofbirth,BirthCertificate,Passport,NationalId,Ielts,Sat,Tofel,Gre,PrefCountry,PrefCollege,PrefSubject,Sponsorship,SponsorshipType,RefferedName,Comments")] PreForm preForm)
         {
             if (ModelState.IsValid)
             {
-                db.PreForms.Add(preForm);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+               
+                var a = db.PreForms.FirstOrDefault(x => x.Email == preForm.Email);
+                if (a == null)
+                {
+                    db.PreForms.Add(preForm);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Message = "Email Already In Used";
+                    return RedirectToAction("Create");
+                }
+               
+                
             }
 
             return View(preForm);
@@ -130,6 +142,15 @@ namespace visa.Controllers
             List<PreForm> lstcity = new List<PreForm>();
             int id = Convert.ToInt32(stateID);
             lstcity = (db.PreForms.Where(x => x.id == id)).ToList();
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            string result = javaScriptSerializer.Serialize(lstcity);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Check(string stateId)
+        {
+            List<PreForm> lstcity = new List<PreForm>();
+            lstcity = (db.PreForms.Where(x => x.Email == stateId)).ToList();
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string result = javaScriptSerializer.Serialize(lstcity);
             return Json(result, JsonRequestBehavior.AllowGet);
