@@ -124,5 +124,10 @@ namespace visa.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult College(string id)
+        {
+            TempData["name"] = id.ToString();
+            return RedirectToAction("Index", "Colleges", new { id = id });
+        }
     }
 }

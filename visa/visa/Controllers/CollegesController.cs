@@ -16,9 +16,9 @@ namespace visa.Controllers
         private dbcontext db = new dbcontext();
 
         // GET: Colleges
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string name)
         {
-            return View(await db.Colleges.ToListAsync());
+            return View(await db.Colleges.Where(x=>x.CountryCode==name).ToListAsync());
         }
 
         // GET: Colleges/Details/5
@@ -39,6 +39,7 @@ namespace visa.Controllers
         // GET: Colleges/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -51,6 +52,7 @@ namespace visa.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.Colleges.Add(college);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
