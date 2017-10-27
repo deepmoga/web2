@@ -11,117 +11,115 @@ using visa.Models;
 
 namespace visa.Controllers
 {
-    public class CollegesController : Controller
+    public class CoursesController : Controller
     {
         private dbcontext db = new dbcontext();
-        public static string cname, ccode;
-        // GET: Colleges
+        public static string cname, code;
+        // GET: Courses
         public async Task<ActionResult> Index(int? id)
         {
-            string idds = id.ToString();
-            return View(await db.Colleges.Where(x=>x.CountryCode==idds).ToListAsync());
+            string ids = id.ToString();
+            return View(await db.Courses.Where(x=>x.collegecode==ids).ToListAsync());
         }
 
-        // GET: Colleges/Details/5
+        // GET: Courses/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            College college = await db.Colleges.FindAsync(id);
-            
-            if (college == null)
+            Course course = await db.Courses.FindAsync(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(college);
+            return View(course);
         }
 
-        // GET: Colleges/Create
+        // GET: Courses/Create
         public ActionResult Create()
         {
-
             return View();
         }
 
-        // POST: Colleges/Create
+        // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,CollegeName,CountryCode")] College college,int? id)
+        public async Task<ActionResult> Create([Bind(Include = "id,CourseName,collegecode,collegename")] Course course,int? id)
         {
             if (ModelState.IsValid)
             {
-                var a = db.Countries.Where(x => x.id == id).ToList();
-                college.CountryCode = a[0].id.ToString();
-                college.ccountryname = a[0].CountryName;
-                db.Colleges.Add(college);
+                var a = db.Colleges.Where(x => x.id == id).ToList();
+                course.collegename = a[0].CollegeName;
+                course.collegecode = id.ToString();
+                db.Courses.Add(course);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index","Colleges", new {id=id });
+                return RedirectToAction("Index", "Courses", new { id = course.collegecode = code });
             }
 
-            return View(college);
+            return View(course);
         }
 
-        // GET: Colleges/Edit/5
+        // GET: Courses/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            College college = await db.Colleges.FindAsync(id);
-            cname = college.ccountryname;
-            ccode = college.CountryCode;
-            if (college == null)
+            Course course = await db.Courses.FindAsync(id);
+            cname = course.collegename;
+            code = course.collegecode;
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(college);
+            return View(course);
         }
 
-        // POST: Colleges/Edit/5
+        // POST: Courses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,CollegeName,CountryCode")] College college)
+        public async Task<ActionResult> Edit([Bind(Include = "id,CourseName,collegecode,collegename")] Course course)
         {
             if (ModelState.IsValid)
             {
-                college.ccountryname = cname;
-                college.CountryCode = ccode;
-                db.Entry(college).State = EntityState.Modified;
+                course.collegecode = code;
+                course.collegename = cname;
+                db.Entry(course).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Courses",new {id=course.collegecode=code});
             }
-            return View(college);
+            return View(course);
         }
 
-        // GET: Colleges/Delete/5
+        // GET: Courses/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            College college = await db.Colleges.FindAsync(id);
-            if (college == null)
+            Course course = await db.Courses.FindAsync(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(college);
+            return View(course);
         }
 
-        // POST: Colleges/Delete/5
+        // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            College college = await db.Colleges.FindAsync(id);
-            db.Colleges.Remove(college);
+            Course course = await db.Courses.FindAsync(id);
+            db.Courses.Remove(course);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -133,11 +131,6 @@ namespace visa.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        public ActionResult Course(string id)
-        {
-            TempData["name"] = id.ToString();
-            return RedirectToAction("Index", "Courses", new { id = id });
         }
     }
 }

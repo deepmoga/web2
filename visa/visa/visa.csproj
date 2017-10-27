@@ -102,13 +102,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CollegesController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\PreFormsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Assigndata.cs" />
     <Compile Include="Models\College.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\dbcontext.cs" />
     <Compile Include="Models\PreForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +136,11 @@
     <Content Include="Views\Countries\Details.cshtml" />
     <Content Include="Views\Countries\Edit.cshtml" />
     <Content Include="Views\Countries\Index.cshtml" />
+    <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

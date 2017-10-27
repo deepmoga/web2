@@ -1,4 +1,4 @@
-﻿@model IEnumerable<visa.Models.College>
+﻿@model IEnumerable<visa.Models.Course>
 
 @{
     ViewBag.Title = "Index";
@@ -8,15 +8,18 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create",new {id=TempData["name"] })
+    @Html.ActionLink("Create New", "Create",new { id=TempData["name"]})
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CollegeName)
+            @Html.DisplayNameFor(model => model.CourseName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CountryCode)
+            @Html.DisplayNameFor(model => model.collegecode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.collegename)
         </th>
         <th></th>
     </tr>
@@ -24,16 +27,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CollegeName)
+            @Html.DisplayFor(modelItem => item.CourseName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CountryCode)
+            @Html.DisplayFor(modelItem => item.collegecode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.collegename)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.id })
-            @Html.ActionLink("Add Course", "Course", new { id = item.id })
         </td>
     </tr>
 }

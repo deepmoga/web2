@@ -13,5 +13,6 @@ namespace visa.Models
         [Required]
         public string CollegeName { get; set; }
         public string CountryCode { get; set; }
+        public string ccountryname { get; set; }
     }
 }
