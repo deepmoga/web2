@@ -11,7 +11,7 @@ namespace visa.Models
         public int id { get; set; }
         public string Serialid { get; set; }
         public string Studentid { get; set; }
-        
+        public string StudentName { get; set; }
 
         public string Country { get; set; }
         public string College { get; set; }

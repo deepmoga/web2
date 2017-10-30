@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AssigndatasController.cs" />
     <Compile Include="Controllers\CollegesController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
@@ -141,6 +142,11 @@
     <Content Include="Views\Courses\Details.cshtml" />
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Assigndatas\Create.cshtml" />
+    <Content Include="Views\Assigndatas\Delete.cshtml" />
+    <Content Include="Views\Assigndatas\Details.cshtml" />
+    <Content Include="Views\Assigndatas\Edit.cshtml" />
+    <Content Include="Views\Assigndatas\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -42,4 +42,3 @@ D:\git\Latest\web2\visa\visa\bin\System.Web.Mvc.xml
 D:\git\Latest\web2\visa\visa\obj\Debug\visa.dll
 D:\git\Latest\web2\visa\visa\obj\Debug\visa.pdb
 F:\New git\web2\visa\visa\obj\Debug\visa.csprojResolveAssemblyReference.cache
-D:\git\Latest\web2\visa\visa\obj\Debug\visa.csprojResolveAssemblyReference.cache

@@ -19,5 +19,7 @@ namespace visa.Models
         public System.Data.Entity.DbSet<visa.Models.PreForm> PreForms { get; set; }
 
         public System.Data.Entity.DbSet<visa.Models.Course> Courses { get; set; }
+
+        public System.Data.Entity.DbSet<visa.Models.Assigndata> Assigndatas { get; set; }
     }
 }
