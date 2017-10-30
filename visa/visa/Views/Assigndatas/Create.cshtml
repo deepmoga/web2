@@ -12,7 +12,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Assigndatas", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
@@ -21,6 +21,21 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
+            @Html.LabelFor(model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="stateDropDown" class="form-control" name="Student">
+                    <option>Select Student</option>
+                    @foreach (var item in studentname)
+                    {
+                        <text>
+
+                            <option value="@item.id">@item.StudentName</option>
+                        </text>
+                    }
+                </select>
+            </div>
+        </div>
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Serialid, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Serialid, new { htmlAttributes = new { @class = "form-control" } })
@@ -34,28 +49,14 @@
                 @Html.EditorFor(model => model.Studentid, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Studentid, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select id="stateDropDown"  class="form-control">
-                    <option>Select state</option>
-                    @foreach (var item in studentname)
-                    {
-                        <text>
-
-                            <option value="@item.id">@item.StudentName</option>
-                        </text>
-                    }
-                </select>
-            </div>
-        </div>
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="countryid" onchange="getCityList()" class="form-control">
+                <select id="countryid" onchange="getCityList()" name="country" class="form-control">
                     <option>Select state</option>
                     @foreach (var item in country)
                     {
@@ -71,7 +72,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.College, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="cityDropDown" name="q" class="form-control">
+                <select id="cityDropDown" name="collegeid" class="form-control" onchange="Courses()" >
                     <option>Select College</option>
                 </select>
             </div>
@@ -80,15 +81,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Course, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Course, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Course, "", new { @class = "text-danger" })
+                <select id="ddlcourse" name="courseid" class="form-control">
+                    <option>Select Course</option>
+                </select>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -118,7 +120,7 @@
 
         $.ajax
         ({
-            url: '/Home/GetCityList',
+            url: '/Assigndatas/GetCityList',
             type: 'POST',
             datatype: 'application/json',
             contentType: 'application/json',
@@ -128,10 +130,42 @@
             success: function (result) {
                 debugger;
                 $("#cityDropDown").html("");
+                $("#cityDropDown").append($('<option>Select College</option>'));
                 $.each($.parseJSON(result), function (i, city) {
                     debugger;
                     var a = city.id;
-                    $("#cityDropDown").append($('<option></option>').val(city.id).html(city.Name))
+                    $("#cityDropDown").append($('<option></option>').val(city.id).html(city.CollegeName))
+                })
+
+            },
+            error: function () {
+                alert("Whooaaa! Something went wrong..")
+            },
+        });
+    }
+</script>
+<script>
+    function Courses() {
+        debugger;
+        var stateId = $("#cityDropDown").val();
+
+        $.ajax
+        ({
+            url: '/Assigndatas/Course',
+            type: 'POST',
+            datatype: 'application/json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                stateId: +stateId
+            }),
+            success: function (result) {
+                debugger;
+                $("#ddlcourse").html("");
+                $("#ddlcourse").append($('<option>Select Course</option>'));
+                $.each($.parseJSON(result), function (i, city) {
+                    debugger;
+                    var a = city.id;
+                    $("#ddlcourse").append($('<option></option>').val(city.id).html(city.CourseName))
                 })
 
             },

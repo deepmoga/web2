@@ -19,8 +19,13 @@ namespace visa.Controllers
         // GET: Assigndatas
         public async Task<ActionResult> Index()
         {
-
-            return View(await db.Assigndatas.ToListAsync());
+            var Assigndata = (from t in db.Assigndatas
+                     join sc in db.PreForms on t.Studentid equals sc.id.ToString()
+                     join st in db.Countries on t.Country equals st.id.ToString()
+                     join d in db.Colleges on t.College equals d.id.ToString()
+                     select new { sc.StudentName, st.CountryName, d.CollegeName}).ToList();
+            
+            return View(Assigndata);
         }
 
         // GET: Assigndatas/Details/5
@@ -53,16 +58,29 @@ namespace visa.Controllers
             string result = javaScriptSerializer.Serialize(lstcity);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Course(string stateID)
+        {
+            List<Course> lstcity = new List<Course>();
 
+            lstcity = (db.Courses.Where(x => x.collegecode == stateID)).ToList();
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            string result = javaScriptSerializer.Serialize(lstcity);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         // POST: Assigndatas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,Serialid,Studentid,StudentName,Country,College,Course,Date")] Assigndata assigndata)
+        public async Task<ActionResult> Create([Bind(Include = "id,Serialid,Studentid,StudentName,Country,College,Course,Date")] Assigndata assigndata,string Student,string country,string collegeid,string courseid)
         {
             if (ModelState.IsValid)
             {
+                assigndata.StudentName = Student;
+                assigndata.Country = country;
+                assigndata.College = collegeid;
+                assigndata.Course = courseid;
+                
                 db.Assigndatas.Add(assigndata);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
