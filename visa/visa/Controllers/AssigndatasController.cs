@@ -19,13 +19,15 @@ namespace visa.Controllers
         // GET: Assigndatas
         public async Task<ActionResult> Index()
         {
-            var Assigndata = (from t in db.Assigndatas
-                     join sc in db.PreForms on t.Studentid equals sc.id.ToString()
-                     join st in db.Countries on t.Country equals st.id.ToString()
-                     join d in db.Colleges on t.College equals d.id.ToString()
-                     select new { sc.StudentName, st.CountryName, d.CollegeName}).ToList();
-            
-            return View(Assigndata);
+            //var Assigndata = (from t in db.Assigndatas
+            //         join sc in db.PreForms on t.Studentid equals sc.id.ToString()
+            //         join st in db.Countries on t.Country equals st.id.ToString()
+            //         join d in db.Colleges on t.College equals d.id.ToString()
+            //         select new { sc.StudentName, st.CountryName, d.CollegeName}).ToList();
+
+            var query = db.Assigndatas.Join(db.PreForms, r => r.Studentid, p => p.id, (r, p) => new { p.StudentName,p.SerialNo }).ToList();
+            string a = query[0].StudentName;
+            return View();
         }
 
         // GET: Assigndatas/Details/5
