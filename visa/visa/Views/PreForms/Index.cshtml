@@ -65,17 +65,25 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ContactNo)
-            <input id="hfid" type="hidden" value="@item.id" />
+            @*<input id="hfid" type="hidden" value="@item.id" />*@
+            
         </td>
+       
         
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.id }) |
+<<<<<<< HEAD
             <a  onclick="ShowPopUp();">Change Status</a>|
             <a href="@Url.Action("Index", null, new { area = string.Empty, controller = "processingforms" }, Request.Url.Scheme)">
                 <span>Processing</span>
             </a>
+=======
+            <a  onclick="ShowPopUp(@item.id);"   id="abc" >Change Status</a>
+           
+
+>>>>>>> a243d8a8a8d078e524396b97bb0496949eddc651
         </td>
     </tr>
 }
@@ -96,15 +104,15 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Serial No</label>
-                                <input id="Text1" class="form-control" type="text" value='@id'/>
+                                <input id="txtsid" class="form-control" type="text" />
                             </div>
                             <div class="form-group">
                                <label>Student Name</label>
-                                <input id="Text1" class="form-control" type="text" value='@a' readonly="True"/>
+                                <input id="txtname" class="form-control" type="text"  readonly="True"/>
                                 </div>
                             <div class="form-group">
                                 <label>Father Name</label>
-                                <input id="Text1" class="form-control" type="text" value='@fname' readonly="True"/>
+                                <input id="txtfname" class="form-control" type="text"  readonly="True"/>
                             </div>
                           
                             </div>
@@ -122,9 +130,9 @@
 
 <script>
 
-        function ShowPopUp() {
-            
-            var id = $("#hfid").val();
+        function ShowPopUp(data) {
+            debugger;
+            var id =data;
             var options = { "backdrop": "static", keyboard: true };
             var url = '/Home/Pop';
             $.ajax
@@ -144,9 +152,10 @@
                    $('#myModal').modal('show');
                    $.each($.parseJSON(result), function (i, city) {
                        debugger;
-                       a = city.StudentName;
-                       fname = city.FatherName;
-                       id = city.SerialNo;
+                       $("#txtsid").val(city.SerialNo)
+                       $("#txtname").val(city.StudentName)
+                       $("#txtfname").val(city.FatherName)
+                     
 
                    })
                    

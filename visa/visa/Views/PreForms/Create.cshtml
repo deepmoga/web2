@@ -77,8 +77,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control",
-               @onchange = " CheckEmail();",@id="emailid" } })
+               <input type="text" class="form-control" id="email" onchange="CheckEmail();" name="Email" />
 
 
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
@@ -239,8 +238,11 @@
 
         function CheckEmail() {
             debugger;
-            var id = $("#emailid").val();
-            //var id = "1";
+            
+            var ids = $("#email").val();
+
+            var id = JSON.stringify({ val1: ids })
+            
             var options = { "backdrop": "static", keyboard: true };
             var url = '/Home/Pop';
             $.ajax
@@ -249,15 +251,23 @@
                type: 'POST',
                datatype: 'application/json',
                contentType: 'application/json',
-               data: JSON.stringify({
-                   stateId: +id
-               }),
+               data: id,
                success: function (result) {
                    debugger;
+                   if (result === null) {
+                       alert("No Data");
+                   }
+                   $.each($.parseJSON(result), function (i, city) {
+                       debugger;
+                      
 
-                   //$('#myModal').modal(options);
-                   //$('#myModal').modal('show');
 
+                   }
+                   
+                   )
+                   
+
+                   
                },
                error: function () {
                    alert("Whooaaa! Something went wrong..")
