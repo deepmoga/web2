@@ -9,25 +9,43 @@ using System.Web;
 using System.Web.Mvc;
 using visa.Models;
 using System.Web.Script.Serialization;
+using System.Dynamic;
 
 namespace visa.Controllers
 {
     public class AssigndatasController : Controller
     {
         private dbcontext db = new dbcontext();
-
+        Assigndata ad = new Assigndata();
         // GET: Assigndatas
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            //var Assigndata = (from t in db.Assigndatas
-            //         join sc in db.PreForms on t.Studentid equals sc.id.ToString()
-            //         join st in db.Countries on t.Country equals st.id.ToString()
-            //         join d in db.Colleges on t.College equals d.id.ToString()
-            //         select new { sc.StudentName, st.CountryName, d.CollegeName}).ToList();
+            List<Assigndata> aa = new List<Assigndata>();
+               dynamic model = new ExpandoObject();
+               var data = (from t in db.Assigndatas
+                    join sc in db.PreForms on t.StudentName equals sc.id.ToString()
+                    join st in db.Countries on t.Country equals st.id.ToString()
+                    join d in db.Colleges on t.College equals d.id.ToString()
+                    join cc in db.Courses on t.Course equals cc.id.ToString()
+                    select new { StudentName=sc.StudentName, Country=st.CountryName, College=d.CollegeName,id=t.id,serial=sc.SerialNo,Course=cc.CourseName,date=t.Date}).ToList();
 
-            var query = db.Assigndatas.Join(db.PreForms, r => r.Studentid, p => p.id, (r, p) => new { p.StudentName,p.SerialNo }).ToList();
-            string a = query[0].StudentName;
-            return View();
+            foreach (var item in data) //retrieve each item and assign to model
+            {
+                aa.Add(new Assigndata()
+                {
+                   
+                    id=item.id,
+                    StudentName = item.StudentName,
+                    Country = item.Country,
+                    College = item.College,
+                    Serialid=item.serial.ToString(),
+                    Course=item.Course,
+                    Date=item.date
+                });
+            }
+
+
+            return View(aa);
         }
 
         // GET: Assigndatas/Details/5

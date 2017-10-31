@@ -46,7 +46,7 @@ namespace visa.Models
         public string SponsorshipType { get; set; }
         public string RefferedName { get; set; }
         public string Comments { get; set; }
-        
+        public string Status { get; set; }
 
     }
     public enum Relegion
@@ -61,6 +61,7 @@ namespace visa.Models
     }
     public enum scolar
     { yes,no}
-
+    public enum status
+    { Pending,UnderProcessing,Rejected,Approved}
 
 }

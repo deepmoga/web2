@@ -56,6 +56,7 @@ namespace visa.Controllers
                 var a = db.PreForms.FirstOrDefault(x => x.Email == preForm.Email);
                 if (a == null)
                 {
+                    preForm.Status = "Pending";
                     db.PreForms.Add(preForm);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
@@ -147,10 +148,14 @@ namespace visa.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Check(string stateId)
+        public ActionResult Check(string val1)
         {
             List<PreForm> lstcity = new List<PreForm>();
-            lstcity = (db.PreForms.Where(x => x.Email == stateId)).ToList();
+            lstcity = (db.PreForms.Where(x => x.Email == val1)).ToList();
+            if (lstcity.Count>0)
+            {
+                ViewBag.message = "Email Already In Used";
+            }
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string result = javaScriptSerializer.Serialize(lstcity);
             return Json(result, JsonRequestBehavior.AllowGet);
