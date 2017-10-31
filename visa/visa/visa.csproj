@@ -105,6 +105,7 @@
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\PreFormsController.cs" />
+    <Compile Include="Controllers\ProcessingFormsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -115,6 +116,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\dbcontext.cs" />
     <Compile Include="Models\PreForm.cs" />
+    <Compile Include="Models\ProcessingForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +149,11 @@
     <Content Include="Views\Assigndatas\Details.cshtml" />
     <Content Include="Views\Assigndatas\Edit.cshtml" />
     <Content Include="Views\Assigndatas\Index.cshtml" />
+    <Content Include="Views\ProcessingForms\Create.cshtml" />
+    <Content Include="Views\ProcessingForms\Delete.cshtml" />
+    <Content Include="Views\ProcessingForms\Details.cshtml" />
+    <Content Include="Views\ProcessingForms\Edit.cshtml" />
+    <Content Include="Views\ProcessingForms\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,129 @@
+﻿@model visa.Models.ProcessingForm
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ProcessingForm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OfferLetterFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfferLetterFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AppliedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AppliedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcessingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessingFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcessingFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessAlertDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcessAlertDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollegeFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollegeFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollegeAlertDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollegeAlertDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GICFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GICFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GICAlertDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GICAlertDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmedicalFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmedicalFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AppointmentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AppointmentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmbassyFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmbassyFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrackingId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrackingId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

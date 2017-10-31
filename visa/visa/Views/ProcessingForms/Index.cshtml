@@ -1,0 +1,106 @@
+﻿@model IEnumerable<visa.Models.ProcessingForm>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferLetterFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppliedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessingFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessAlertDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CollegeFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CollegeAlertDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GICFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GICAlertDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmedicalFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointmentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmbassyFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrackingId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfferLetterFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppliedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessingFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessAlertDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollegeFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollegeAlertDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GICFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GICAlertDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmedicalFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppointmentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmbassyFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrackingId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
