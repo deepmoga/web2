@@ -35,10 +35,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProcessingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RecivedDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProcessingDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProcessingDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.RecivedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RecivedDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -115,10 +115,26 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.EmbassyAlertDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmbassyAlertDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmbassyAlertDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.TrackingId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TrackingId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TrackingId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Studentid, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Studentid, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Studentid, "", new { @class = "text-danger" })
             </div>
         </div>
 

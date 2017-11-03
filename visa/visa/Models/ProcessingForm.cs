@@ -10,7 +10,8 @@ namespace visa.Models
         public int id { get; set; }
         public string OfferLetterFee { get; set; }
         public string AppliedDate { get; set; }
-        public string ProcessingDate { get; set; }
+        public string RecivedDate { get; set; }
+       
         public string ProcessingFee { get; set; }
         public string ProcessAlertDate { get; set; }
         public string CollegeFee { get; set; }
@@ -20,6 +21,8 @@ namespace visa.Models
         public string EmedicalFee { get; set; }
         public string AppointmentDate { get; set; }
         public string EmbassyFee { get; set; }
+        public string EmbassyAlertDate { get; set; }
         public string TrackingId { get; set; }
+        public string Studentid { get; set; }
     }
 }

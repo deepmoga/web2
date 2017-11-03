@@ -47,10 +47,11 @@ namespace visa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,OfferLetterFee,AppliedDate,ProcessingDate,ProcessingFee,ProcessAlertDate,CollegeFee,CollegeAlertDate,GICFee,GICAlertDate,EmedicalFee,AppointmentDate,EmbassyFee,TrackingId")] ProcessingForm processingForm)
+        public async Task<ActionResult> Create([Bind(Include = "id,OfferLetterFee,AppliedDate,RecivedDate,ProcessingFee,ProcessAlertDate,CollegeFee,CollegeAlertDate,GICFee,GICAlertDate,EmedicalFee,AppointmentDate,EmbassyFee,EmbassyAlertDate,TrackingId,Studentid")] ProcessingForm processingForm, int? id)
         {
             if (ModelState.IsValid)
             {
+                processingForm.Studentid = id.ToString();
                 db.ProcessingForms.Add(processingForm);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -79,7 +80,7 @@ namespace visa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,OfferLetterFee,AppliedDate,ProcessingDate,ProcessingFee,ProcessAlertDate,CollegeFee,CollegeAlertDate,GICFee,GICAlertDate,EmedicalFee,AppointmentDate,EmbassyFee,TrackingId")] ProcessingForm processingForm)
+        public async Task<ActionResult> Edit([Bind(Include = "id,OfferLetterFee,AppliedDate,RecivedDate,ProcessingFee,ProcessAlertDate,CollegeFee,CollegeAlertDate,GICFee,GICAlertDate,EmedicalFee,AppointmentDate,EmbassyFee,EmbassyAlertDate,TrackingId,Studentid")] ProcessingForm processingForm)
         {
             if (ModelState.IsValid)
             {
@@ -123,6 +124,10 @@ namespace visa.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Profile()
+        {
+            return View();
         }
     }
 }

@@ -154,6 +154,7 @@
     <Content Include="Views\ProcessingForms\Details.cshtml" />
     <Content Include="Views\ProcessingForms\Edit.cshtml" />
     <Content Include="Views\ProcessingForms\Index.cshtml" />
+    <Content Include="Views\ProcessingForms\Profile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

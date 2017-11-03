@@ -74,16 +74,12 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.id }) |
-<<<<<<< HEAD
-            <a  onclick="ShowPopUp();">Change Status</a>|
-            <a href="@Url.Action("Index", null, new { area = string.Empty, controller = "processingforms" }, Request.Url.Scheme)">
-                <span>Processing</span>
-            </a>
-=======
-            <a  onclick="ShowPopUp(@item.id);"   id="abc" >Change Status</a>
+
+            <a  onclick="ShowPopUp(@item.id);"   id="abc" >Change Status</a> |
+            @Html.ActionLink("Profile", "profile", new { id = item.id }) |
            
 
->>>>>>> a243d8a8a8d078e524396b97bb0496949eddc651
+
         </td>
     </tr>
 }

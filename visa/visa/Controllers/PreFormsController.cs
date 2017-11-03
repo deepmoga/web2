@@ -160,5 +160,10 @@ namespace visa.Controllers
             string result = javaScriptSerializer.Serialize(lstcity);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult profile(int? id)
+        {
+           
+            return RedirectToAction("Create", "ProcessingForms", new { id = id });
+        }
     }
 }
