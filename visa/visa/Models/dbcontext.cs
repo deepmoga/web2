@@ -23,5 +23,7 @@ namespace visa.Models
         public System.Data.Entity.DbSet<visa.Models.Assigndata> Assigndatas { get; set; }
 
         public System.Data.Entity.DbSet<visa.Models.ProcessingForm> ProcessingForms { get; set; }
+
+        public System.Data.Entity.DbSet<visa.Models.Account> Accounts { get; set; }
     }
 }

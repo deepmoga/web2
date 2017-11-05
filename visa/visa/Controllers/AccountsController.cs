@@ -11,109 +11,107 @@ using visa.Models;
 
 namespace visa.Controllers
 {
-    public class CountriesController : BaseController
+    public class AccountsController : Controller
     {
         private dbcontext db = new dbcontext();
 
-        // GET: Countries
+        // GET: Accounts
         public async Task<ActionResult> Index()
         {
-            return View(await db.Countries.ToListAsync());
+            return View(await db.Accounts.ToListAsync());
         }
 
-        // GET: Countries/Details/5
+        // GET: Accounts/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Country country = await db.Countries.FindAsync(id);
-            if (country == null)
+            Account account = await db.Accounts.FindAsync(id);
+            if (account == null)
             {
                 return HttpNotFound();
             }
-            return View(country);
+            return View(account);
         }
 
-        // GET: Countries/Create
+        // GET: Accounts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Countries/Create
+        // POST: Accounts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,CountryName")] Country country)
+        public async Task<ActionResult> Create([Bind(Include = "id,Name,Contact,Role,UserName,Password")] Account account)
         {
             if (ModelState.IsValid)
             {
-                db.Countries.Add(country);
+                db.Accounts.Add(account);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(country);
+            return View(account);
         }
 
-        // GET: Countries/Edit/5
+        // GET: Accounts/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Country country = await db.Countries.FindAsync(id);
-            if (country == null)
+            Account account = await db.Accounts.FindAsync(id);
+            if (account == null)
             {
                 return HttpNotFound();
             }
-            return View(country);
+            return View(account);
         }
 
-        // POST: Countries/Edit/5
+        // POST: Accounts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,CountryName")] Country country)
+        public async Task<ActionResult> Edit([Bind(Include = "id,Name,Contact,Role,UserName,Password")] Account account)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(country).State = EntityState.Modified;
+                db.Entry(account).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                //Success(string.Format("<b>{0}</b> was successfully added to the database.", country.CountryName), true);
-
                 return RedirectToAction("Index");
             }
-            return View(country);
+            return View(account);
         }
 
-        // GET: Countries/Delete/5
+        // GET: Accounts/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Country country = await db.Countries.FindAsync(id);
-            if (country == null)
+            Account account = await db.Accounts.FindAsync(id);
+            if (account == null)
             {
                 return HttpNotFound();
             }
-            return View(country);
+            return View(account);
         }
 
-        // POST: Countries/Delete/5
+        // POST: Accounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Country country = await db.Countries.FindAsync(id);
-            db.Countries.Remove(country);
+            Account account = await db.Accounts.FindAsync(id);
+            db.Accounts.Remove(account);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -126,10 +124,21 @@ namespace visa.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult College(string id)
+        public ActionResult Login(Account objUser)
         {
-            TempData["name"] = id.ToString();
-            return RedirectToAction("Index", "Colleges", new { id = id });
+
+            using (dbcontext db = new dbcontext())
+            {
+                var obj = db.Accounts.Where(a => a.UserName.Equals(objUser.UserName) && a.Password.Equals(objUser.Password)).FirstOrDefault();
+                if (obj != null)
+                {
+                    Session["UserID"] = obj.UserName.ToString();
+                    Session["UserName"] = obj.Password.ToString();
+                    return RedirectToAction("Index", "Preforms");
+                }
+            }
+
+            return View(objUser);
         }
     }
 }

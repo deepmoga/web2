@@ -162,8 +162,9 @@ namespace visa.Controllers
         }
         public ActionResult profile(int? id)
         {
-           
-            return RedirectToAction("Create", "ProcessingForms", new { id = id });
+            TempData["pid"] = id;
+            return RedirectToAction("StuProfile", "ProcessingForms", new { id = id });
+            
         }
     }
 }

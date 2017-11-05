@@ -11,7 +11,7 @@ using visa.Models;
 
 namespace visa.Controllers
 {
-    public class ProcessingFormsController : Controller
+    public class ProcessingFormsController :BaseController
     {
         private dbcontext db = new dbcontext();
 
@@ -37,9 +37,25 @@ namespace visa.Controllers
         }
 
         // GET: ProcessingForms/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+
+            ProcessingForm pf = new ProcessingForm();
+            string idds = id.ToString();
+            pf = db.ProcessingForms.FirstOrDefault(x => x.Studentid == idds);
+            if (pf != null)
+            {
+               
+               ViewBag.message = "Yes";
+                this.SetNotification("You Already Filled A Form. You Can Only Edit This Form . Click On Edit", NotificationEnumeration.Warning);
+                return View(pf);
+            }
+            else
+            {
+                // ViewBag.message = "Yes";
+                return View();
+            }
+           
         }
 
         // POST: ProcessingForms/Create
@@ -47,14 +63,14 @@ namespace visa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,OfferLetterFee,AppliedDate,RecivedDate,ProcessingFee,ProcessAlertDate,CollegeFee,CollegeAlertDate,GICFee,GICAlertDate,EmedicalFee,AppointmentDate,EmbassyFee,EmbassyAlertDate,TrackingId,Studentid")] ProcessingForm processingForm, int? id)
+        public async Task<ActionResult> Create([Bind(Include = "id,OfferLetterFee,AppliedDate,RecivedDate,ProcessingFee,ProcessAlertDate,CollegeFee,CollegeAlertDate,GICFee,GICAlertDate,EmedicalFee,AppointmentDate,EmbassyFee,EmbassyAlertDate,TrackingId,Studentid")] ProcessingForm processingForm,int? id)
         {
             if (ModelState.IsValid)
             {
                 processingForm.Studentid = id.ToString();
                 db.ProcessingForms.Add(processingForm);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("StuProfile",new { id=id});
             }
 
             return View(processingForm);
@@ -86,7 +102,9 @@ namespace visa.Controllers
             {
                 db.Entry(processingForm).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                this.SetNotification("Your Fees Form Edit Sucessfully.", NotificationEnumeration.Success);
+                TempData["pid"] = processingForm.Studentid;
+                return RedirectToAction("StuProfile",new {id=processingForm.Studentid });
             }
             return View(processingForm);
         }
@@ -125,9 +143,18 @@ namespace visa.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult Profile()
+        public ActionResult StuProfile(int? id)
         {
+
+          //  this.SetNotification("Your support ticket was created successfully.", NotificationEnumeration.Success);
+
             return View();
+        }
+        public ActionResult Forms(int? id)
+        {
+            
+            return RedirectToAction("Create", "ProcessingForms", new { id = id });
+
         }
     }
 }

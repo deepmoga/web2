@@ -100,7 +100,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AssigndatasController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CollegesController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
@@ -110,11 +112,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Assigndata.cs" />
     <Compile Include="Models\College.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\dbcontext.cs" />
+    <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\PreForm.cs" />
     <Compile Include="Models\ProcessingForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,12 +153,18 @@
     <Content Include="Views\Assigndatas\Details.cshtml" />
     <Content Include="Views\Assigndatas\Edit.cshtml" />
     <Content Include="Views\Assigndatas\Index.cshtml" />
+    <Content Include="Views\Accounts\Create.cshtml" />
+    <Content Include="Views\Accounts\Delete.cshtml" />
+    <Content Include="Views\Accounts\Details.cshtml" />
+    <Content Include="Views\Accounts\Edit.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Shared\_PLayout.cshtml" />
     <Content Include="Views\ProcessingForms\Create.cshtml" />
     <Content Include="Views\ProcessingForms\Delete.cshtml" />
     <Content Include="Views\ProcessingForms\Details.cshtml" />
     <Content Include="Views\ProcessingForms\Edit.cshtml" />
     <Content Include="Views\ProcessingForms\Index.cshtml" />
-    <Content Include="Views\ProcessingForms\Profile.cshtml" />
+    <Content Include="Views\ProcessingForms\StuProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -168,6 +178,7 @@
     <Folder Include="bootstrap\" />
     <Folder Include="css\" />
     <Folder Include="js\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
