@@ -1,0 +1,62 @@
+﻿@model IEnumerable<visa.Models.Docs>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+@using (Html.BeginForm("Index","Docs",FormMethod.Post))
+{
+    <div class="col-md-6">
+        <div class="form-group">
+           <input type="text" id="search" name="searchdata" class="form-control" />
+        </div>
+        
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+          <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+
+    </div>
+}
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DocName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Documents)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocName)
+        </td>
+        <td>
+            <img src="~/UploadedFiles/@item.Documents" width="80" />
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
+

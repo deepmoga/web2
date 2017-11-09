@@ -135,7 +135,28 @@
                                 <li>
                                     @Html.ActionLink("Assign University", "Index", "Assigndatas")
                                 </li>
-                                
+                                <li class="parent">
+                                    <a href="#"><span>Proceesing Files</span></a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            @Html.ActionLink("Add Details", "Create", "ProcessingForms")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Manage Files", "Index", "ProcessingForms")
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
+                                    <a href="#"><span>Documents</span></a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            @Html.ActionLink("Add Documents", "Create", "Docs")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Manage Documents", "Index", "Docs")
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="parent">
                                     <a href="#"><span>Settings</span></a>
                                     <ul class="sub-menu">
@@ -145,6 +166,7 @@
                                        
                                     </ul>
                                 </li>
+                              
 
                                 <li>
                                     @Html.ActionLink("Pages", "Index", "Pages")
@@ -171,6 +193,13 @@
         </div>
         <div class="be-content">
             <div class="main-content container-fluid">
+                @if (TempData["Notification"] != null)
+                {
+                    @Html.Hidden("NotificationAutoHide", TempData["NotificationAutoHide"])
+                    <div id="NotificationBox" class="@TempData["NotificationCSS"]" style="display: none">
+                        @TempData["Notification"]
+                    </div>
+                }
                 <div class="panel panel-default panel-border-color panel-border-color-primary">
                    
                     <div class="panel-body">
@@ -469,6 +498,18 @@ tinymce.init({
     ]
 });</script>
     <script src="~/assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script language="javascript" type="text/javascript">
+     //Used to display and close the system notifications
+    $(document).ready(function () {
+        debugger;
+    $("#NotificationBox").fadeIn(1000);
+
+    if ($("#NotificationAutoHide").val() == "true") {
+            //$("#NotificationBox").delay(3000).fadeOut(2000);
+        $("#NotificationBox").delay(8000).slideUp(1000);
+    }
+    });
+    </script>
 </body>
 <!-- Mirrored from foxythemes.net/preview/products/beagle2/pages-blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Aug 2017 09:07:33 GMT -->
 </html>

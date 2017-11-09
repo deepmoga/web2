@@ -47,6 +47,8 @@ namespace visa.Models
         public string RefferedName { get; set; }
         public string Comments { get; set; }
         public string Status { get; set; }
+        public string ActivationCode { get; set; }
+        public string ConfirmStatus { get; set; }
 
     }
     public enum Relegion

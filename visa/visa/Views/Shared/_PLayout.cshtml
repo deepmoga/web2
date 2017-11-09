@@ -1,6 +1,9 @@
-﻿@{
+﻿@using visa.Models
+@{
     Layout = null;
+   
 }
+
 
 <!DOCTYPE html>
 
@@ -183,10 +186,11 @@
                     <div class="panel-body">
                         <div class="col-md-12">
                             @Html.ActionLink("Fees Form", "Forms",new {id =TempData["pid"]})
+                            @Html.ActionLink("Documents", "Docs", new { id = Session["pid"]})
                         </div>
                         @RenderBody()
                        
-
+                       
                     </div>
                 </div>
 

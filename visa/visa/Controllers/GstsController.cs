@@ -11,107 +11,107 @@ using visa.Models;
 
 namespace visa.Controllers
 {
-    public class AccountsController : Controller
+    public class GstsController : Controller
     {
         private dbcontext db = new dbcontext();
 
-        // GET: Accounts
+        // GET: Gsts
         public async Task<ActionResult> Index()
         {
-            return View(await db.Accounts.ToListAsync());
+            return View(await db.Gsts.ToListAsync());
         }
 
-        // GET: Accounts/Details/5
+        // GET: Gsts/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = await db.Accounts.FindAsync(id);
-            if (account == null)
+            Gst gst = await db.Gsts.FindAsync(id);
+            if (gst == null)
             {
                 return HttpNotFound();
             }
-            return View(account);
+            return View(gst);
         }
 
-        // GET: Accounts/Create
+        // GET: Gsts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Accounts/Create
+        // POST: Gsts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,Name,Contact,Role,UserName,Password")] Account account)
+        public async Task<ActionResult> Create([Bind(Include = "id,Name,GstNo,CenterGst,StateGst,TotalGst")] Gst gst)
         {
             if (ModelState.IsValid)
             {
-                db.Accounts.Add(account);
+                db.Gsts.Add(gst);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(account);
+            return View(gst);
         }
 
-        // GET: Accounts/Edit/5
+        // GET: Gsts/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = await db.Accounts.FindAsync(id);
-            if (account == null)
+            Gst gst = await db.Gsts.FindAsync(id);
+            if (gst == null)
             {
                 return HttpNotFound();
             }
-            return View(account);
+            return View(gst);
         }
 
-        // POST: Accounts/Edit/5
+        // POST: Gsts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,Name,Contact,Role,UserName,Password")] Account account)
+        public async Task<ActionResult> Edit([Bind(Include = "id,Name,GstNo,CenterGst,StateGst,TotalGst")] Gst gst)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(account).State = EntityState.Modified;
+                db.Entry(gst).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(account);
+            return View(gst);
         }
 
-        // GET: Accounts/Delete/5
+        // GET: Gsts/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = await db.Accounts.FindAsync(id);
-            if (account == null)
+            Gst gst = await db.Gsts.FindAsync(id);
+            if (gst == null)
             {
                 return HttpNotFound();
             }
-            return View(account);
+            return View(gst);
         }
 
-        // POST: Accounts/Delete/5
+        // POST: Gsts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Account account = await db.Accounts.FindAsync(id);
-            db.Accounts.Remove(account);
+            Gst gst = await db.Gsts.FindAsync(id);
+            db.Gsts.Remove(gst);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -123,26 +123,6 @@ namespace visa.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        public ActionResult Login(Account objUser)
-        {
-
-            using (dbcontext db = new dbcontext())
-            {
-                var obj = db.Accounts.Where(a => a.UserName.Equals(objUser.UserName) && a.Password.Equals(objUser.Password)).FirstOrDefault();
-                if (obj != null)
-                {
-                    Session["UserID"] = obj.UserName.ToString();
-                    Session["UserName"] = obj.Password.ToString();
-                    return RedirectToAction("Index", "Preforms");
-                }
-            }
-
-            return View(objUser);
-        }
-        public ActionResult Login()
-        {
-            return View();
         }
     }
 }

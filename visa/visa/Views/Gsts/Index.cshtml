@@ -1,0 +1,58 @@
+﻿@model IEnumerable<visa.Models.Gst>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GstNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CenterGst)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StateGst)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalGst)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GstNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CenterGst)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateGst)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalGst)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

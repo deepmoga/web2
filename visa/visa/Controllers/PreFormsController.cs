@@ -9,13 +9,18 @@ using System.Web;
 using System.Web.Mvc;
 using visa.Models;
 using System.Web.Script.Serialization;
+using System.Net.Mail;
+using System.IO;
 
 namespace visa.Controllers
 {
     public class PreFormsController : Controller
     {
         private dbcontext db = new dbcontext();
-
+       public static PreForm usersEntities = new PreForm();
+        public static PreForm pf = new PreForm();
+        public static string student;
+        Guid activationCode = Guid.NewGuid();
         // GET: PreForms
         public async Task<ActionResult> Index()
         {
@@ -81,6 +86,7 @@ namespace visa.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PreForm preForm = await db.PreForms.FindAsync(id);
+            
             if (preForm == null)
             {
                 return HttpNotFound();
@@ -93,12 +99,16 @@ namespace visa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,SerialNo,StudentName,FatherName,MotherName,Religion,Address,ContactNo,Nationality,Dateofbirth,BirthCertificate,Passport,NationalId,Ielts,Sat,Tofel,Gre,PrefCountry,PrefCollege,PrefSubject,Sponsorship,SponsorshipType,RefferedName,Comments")] PreForm preForm)
+        public async Task<ActionResult> Edit([Bind(Include = "id,SerialNo,StudentName,FatherName,MotherName,Religion,Address,ContactNo,Email,Nationality,Dateofbirth,BirthCertificate,Passport,NationalId,Ielts,Sat,Tofel,Gre,PrefCountry,PrefCollege,PrefSubject,Sponsorship,SponsorshipType,RefferedName,Comments")] PreForm preForm)
         {
             if (ModelState.IsValid)
             {
+                preForm.ActivationCode = activationCode.ToString();
                 db.Entry(preForm).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+
+                // Send Confirm Email Address
+                SendActivationEmail(preForm.Email);
                 return RedirectToAction("Index");
             }
             return View(preForm);
@@ -163,8 +173,70 @@ namespace visa.Controllers
         public ActionResult profile(int? id)
         {
             TempData["pid"] = id;
-            return RedirectToAction("StuProfile", "ProcessingForms", new { id = id });
+            ViewBag.pid = id;
+            Session["pid"] = id;
+            return RedirectToAction("StuProfile", "ProcessingForms", new { id = Session["pid"] });
             
+        }
+        private void SendActivationEmail(string Email)
+        {
+            string body;
+            using (var sr = new StreamReader(Server.MapPath("../../App_Data/Template/") + "ConfirmEmail.txt"))
+            {
+                body = sr.ReadToEnd();
+            }
+            // Guid activationCode = Guid.NewGuid();
+            using (MailMessage mm = new MailMessage("offsolut@gmail.com", Email))
+            {
+                mm.Subject = "Account Activation";
+               // Username: { 1}
+                string username = HttpUtility.UrlEncode("abc");
+                string password = HttpUtility.UrlEncode("Xyz");
+                
+                string emailSubject = @"Welcome Email";
+
+                string messageBody = string.Format(body, username, username, password);
+                //body += " < br /><br />Please click the following link to activate your account";
+                //body += "<br /><a href = '" + string.Format("{0}://{1}/PreForms/Activation/{2}", Request.Url.Scheme, Request.Url.Authority, activationCode) + "'>Click here to activate your account.</a>";
+                //body += "<br /><br />Thanks";
+                //mm.Body = body;
+                body = messageBody;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential("offsolut@gmail.com", "passiong");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+                
+            }
+            
+    }
+        public ActionResult Activation()
+        {
+            ViewBag.Message = "Invalid Activation code.";
+            if (RouteData.Values["id"] != null)
+            {
+                Guid activationCode = new Guid(RouteData.Values["id"].ToString());
+
+                string code = activationCode.ToString();
+                usersEntities = db.PreForms.Where(p => p.ActivationCode == code).FirstOrDefault();
+                if (usersEntities != null)
+                {
+                    usersEntities.ConfirmStatus = "Condirmed";
+                    db.Entry(usersEntities).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ViewBag.Message = "Activation successful.";
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Invalid Activation code.";
+            }
+
+            return View();
         }
     }
 }

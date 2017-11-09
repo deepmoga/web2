@@ -87,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Template\ConfirmEmail.txt" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -106,6 +107,9 @@
     <Compile Include="Controllers\CollegesController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\DocsController.cs" />
+    <Compile Include="Controllers\GstsController.cs" />
+    <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\PreFormsController.cs" />
     <Compile Include="Controllers\ProcessingFormsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -118,7 +122,11 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\dbcontext.cs" />
+    <Compile Include="Models\Docs.cs" />
+    <Compile Include="Models\Gst.cs" />
     <Compile Include="Models\Helper.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\InvoiceBalance.cs" />
     <Compile Include="Models\PreForm.cs" />
     <Compile Include="Models\ProcessingForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,6 +173,22 @@
     <Content Include="Views\ProcessingForms\Edit.cshtml" />
     <Content Include="Views\ProcessingForms\Index.cshtml" />
     <Content Include="Views\ProcessingForms\StuProfile.cshtml" />
+    <Content Include="Views\Gsts\Create.cshtml" />
+    <Content Include="Views\Gsts\Delete.cshtml" />
+    <Content Include="Views\Gsts\Details.cshtml" />
+    <Content Include="Views\Gsts\Edit.cshtml" />
+    <Content Include="Views\Gsts\Index.cshtml" />
+    <Content Include="Views\Invoices\Create.cshtml" />
+    <Content Include="Views\Invoices\Delete.cshtml" />
+    <Content Include="Views\Invoices\Details.cshtml" />
+    <Content Include="Views\Invoices\Edit.cshtml" />
+    <Content Include="Views\Invoices\Index.cshtml" />
+    <Content Include="Views\Docs\Create.cshtml" />
+    <Content Include="Views\Docs\Delete.cshtml" />
+    <Content Include="Views\Docs\Details.cshtml" />
+    <Content Include="Views\Docs\Edit.cshtml" />
+    <Content Include="Views\Docs\Index.cshtml" />
+    <Content Include="Views\PreForms\Activation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -173,11 +197,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="assets\" />
     <Folder Include="bootstrap\" />
     <Folder Include="css\" />
     <Folder Include="js\" />
+    <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <PropertyGroup>
