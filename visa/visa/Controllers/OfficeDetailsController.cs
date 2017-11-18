@@ -11,107 +11,110 @@ using visa.Models;
 
 namespace visa.Controllers
 {
-    public class AccountsController : Controller
+    public class OfficeDetailsController :BaseController
     {
         private dbcontext db = new dbcontext();
 
-        // GET: Accounts
+        // GET: OfficeDetails
         public async Task<ActionResult> Index()
         {
-            return View(await db.Accounts.ToListAsync());
+            return View(await db.OfficeDetails.ToListAsync());
         }
 
-        // GET: Accounts/Details/5
+        // GET: OfficeDetails/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = await db.Accounts.FindAsync(id);
-            if (account == null)
+            OfficeDetail officeDetail = await db.OfficeDetails.FindAsync(id);
+            if (officeDetail == null)
             {
                 return HttpNotFound();
             }
-            return View(account);
+            return View(officeDetail);
         }
 
-        // GET: Accounts/Create
+        // GET: OfficeDetails/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Accounts/Create
+        // POST: OfficeDetails/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,Name,Contact,Role,UserName,Password")] Account account)
+        public async Task<ActionResult> Create([Bind(Include = "id,CompanyName,Address,Phone,GSTNo,Email,Password")] OfficeDetail officeDetail)
         {
             if (ModelState.IsValid)
             {
-                db.Accounts.Add(account);
+                db.OfficeDetails.Add(officeDetail);
                 await db.SaveChangesAsync();
+                this.SetNotification("Office Detail Added SucessFully", NotificationEnumeration.Success);
                 return RedirectToAction("Index");
             }
 
-            return View(account);
+            return View(officeDetail);
         }
 
-        // GET: Accounts/Edit/5
+        // GET: OfficeDetails/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = await db.Accounts.FindAsync(id);
-            if (account == null)
+            OfficeDetail officeDetail = await db.OfficeDetails.FindAsync(id);
+            if (officeDetail == null)
             {
                 return HttpNotFound();
             }
-            return View(account);
+            return View(officeDetail);
         }
 
-        // POST: Accounts/Edit/5
+        // POST: OfficeDetails/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,Name,Contact,Role,UserName,Password")] Account account)
+        public async Task<ActionResult> Edit([Bind(Include = "id,CompanyName,Address,Phone,GSTNo,Email,Password")] OfficeDetail officeDetail)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(account).State = EntityState.Modified;
+                db.Entry(officeDetail).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                this.SetNotification("Office Detail Edit SucessFully", NotificationEnumeration.Success);
                 return RedirectToAction("Index");
             }
-            return View(account);
+            return View(officeDetail);
         }
 
-        // GET: Accounts/Delete/5
+        // GET: OfficeDetails/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = await db.Accounts.FindAsync(id);
-            if (account == null)
+            OfficeDetail officeDetail = await db.OfficeDetails.FindAsync(id);
+            if (officeDetail == null)
             {
                 return HttpNotFound();
             }
-            return View(account);
+            return View(officeDetail);
         }
 
-        // POST: Accounts/Delete/5
+        // POST: OfficeDetails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Account account = await db.Accounts.FindAsync(id);
-            db.Accounts.Remove(account);
+            OfficeDetail officeDetail = await db.OfficeDetails.FindAsync(id);
+            db.OfficeDetails.Remove(officeDetail);
+            this.SetNotification("Office Detail Deleted SucessFully", NotificationEnumeration.Error);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -123,30 +126,6 @@ namespace visa.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        public ActionResult Login(Account objUser)
-        {
-
-            using (dbcontext db = new dbcontext())
-            {
-                var obj = db.Accounts.Where(a => a.UserName.Equals(objUser.UserName) && a.Password.Equals(objUser.Password)).FirstOrDefault();
-                if (obj != null)
-                {
-                    Session["UserID"] = obj.UserName.ToString();
-                    Session["UserName"] = obj.Password.ToString();
-                    return RedirectToAction("Index", "Preforms");
-                }
-            }
-
-            return View(objUser);
-        }
-        public ActionResult Login()
-        {
-            return View();
-        }
-        public ActionResult DashBoard()
-        {
-            return View();
         }
     }
 }

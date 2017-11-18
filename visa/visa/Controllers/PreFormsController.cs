@@ -14,7 +14,7 @@ using System.IO;
 
 namespace visa.Controllers
 {
-    public class PreFormsController : Controller
+    public class PreFormsController :BaseController
     {
         private dbcontext db = new dbcontext();
        public static PreForm usersEntities = new PreForm();
@@ -99,7 +99,7 @@ namespace visa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,SerialNo,StudentName,FatherName,MotherName,Religion,Address,ContactNo,Email,Nationality,Dateofbirth,BirthCertificate,Passport,NationalId,Ielts,Sat,Tofel,Gre,PrefCountry,PrefCollege,PrefSubject,Sponsorship,SponsorshipType,RefferedName,Comments")] PreForm preForm)
+        public async Task<ActionResult> Edit([Bind(Include = "id,SerialNo,StudentName,FatherName,MotherName,Religion,Address,ContactNo,Email,Nationality,Dateofbirth,BirthCertificate,Passport,NationalId,Ielts,Sat,Tofel,Gre,PrefCountry,PrefCollege,PrefSubject,Sponsorship,SponsorshipType,RefferedName,Comments")] PreForm preForm,Helper help)
         {
             if (ModelState.IsValid)
             {
@@ -108,9 +108,26 @@ namespace visa.Controllers
                 await db.SaveChangesAsync();
 
                 // Send Confirm Email Address
-                SendActivationEmail(preForm.Email);
+                //   SendActivationEmail(preForm.Email);
+                // var url = string.Format("{ 0}://{1}/PreForms/Activation/{2}", Request.Url.Scheme, Request.Url.Authority, activationCode);
+                if (preForm.Email != null)
+                {
+                    var temp = db.EmailTemplates.FirstOrDefault(x => x.id == 1);
+                    if (temp != null)
+                    {
+                        string body = help.PopulateBody("Official Visa", "Verify Email", "", temp.Template);
+                        help.SendHtmlFormattedEmail(preForm.Email, temp.Title, body);
+                    }
+                    else
+                    {
+                        this.SetNotification("Enter The Email Address For Get More Updates", NotificationEnumeration.Warning);
+                    }
+
+                   
+                }
                 return RedirectToAction("Index");
             }
+           
             return View(preForm);
         }
 
@@ -195,7 +212,7 @@ namespace visa.Controllers
                 
                 string emailSubject = @"Welcome Email";
 
-                string messageBody = string.Format(body, username, username, password);
+                string messageBody = string.Format("Welcome to new Mail", username, username, "Demo test");
                 //body += " < br /><br />Please click the following link to activate your account";
                 //body += "<br /><a href = '" + string.Format("{0}://{1}/PreForms/Activation/{2}", Request.Url.Scheme, Request.Url.Authority, activationCode) + "'>Click here to activate your account.</a>";
                 //body += "<br /><br />Thanks";
@@ -225,7 +242,7 @@ namespace visa.Controllers
                 usersEntities = db.PreForms.Where(p => p.ActivationCode == code).FirstOrDefault();
                 if (usersEntities != null)
                 {
-                    usersEntities.ConfirmStatus = "Condirmed";
+                    usersEntities.ConfirmStatus = "Confirmed";
                     db.Entry(usersEntities).State = EntityState.Modified;
                     db.SaveChanges();
                     ViewBag.Message = "Activation successful.";

@@ -31,5 +31,11 @@ namespace visa.Models
         public System.Data.Entity.DbSet<visa.Models.Gst> Gsts { get; set; }
 
         public System.Data.Entity.DbSet<visa.Models.Invoice> Invoices { get; set; }
+
+        public System.Data.Entity.DbSet<visa.Models.EmailTemplate> EmailTemplates { get; set; }
+
+        public System.Data.Entity.DbSet<visa.Models.OfficeDetail> OfficeDetails { get; set; }
+
+        public System.Data.Entity.DbSet<visa.Models.LogsDetails> LogsDetails { get; set; }
     }
 }

@@ -88,8 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Template\ConfirmEmail.txt" />
+    <Content Include="App_Data\Template\NewMail.txt" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -108,8 +110,11 @@
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DocsController.cs" />
+    <Compile Include="Controllers\EmailTemplatesController.cs" />
     <Compile Include="Controllers\GstsController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
+    <Compile Include="Controllers\LogsDetailsController.cs" />
+    <Compile Include="Controllers\OfficeDetailsController.cs" />
     <Compile Include="Controllers\PreFormsController.cs" />
     <Compile Include="Controllers\ProcessingFormsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -123,10 +128,13 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\dbcontext.cs" />
     <Compile Include="Models\Docs.cs" />
+    <Compile Include="Models\EmailTemplate.cs" />
     <Compile Include="Models\Gst.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceBalance.cs" />
+    <Compile Include="Models\LogsDetails.cs" />
+    <Compile Include="Models\OfficeDetail.cs" />
     <Compile Include="Models\PreForm.cs" />
     <Compile Include="Models\ProcessingForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -189,6 +197,23 @@
     <Content Include="Views\Docs\Edit.cshtml" />
     <Content Include="Views\Docs\Index.cshtml" />
     <Content Include="Views\PreForms\Activation.cshtml" />
+    <Content Include="Views\EmailTemplates\Create.cshtml" />
+    <Content Include="Views\EmailTemplates\Delete.cshtml" />
+    <Content Include="Views\EmailTemplates\Details.cshtml" />
+    <Content Include="Views\EmailTemplates\Edit.cshtml" />
+    <Content Include="Views\EmailTemplates\Index.cshtml" />
+    <Content Include="Views\OfficeDetails\Create.cshtml" />
+    <Content Include="Views\OfficeDetails\Delete.cshtml" />
+    <Content Include="Views\OfficeDetails\Details.cshtml" />
+    <Content Include="Views\OfficeDetails\Edit.cshtml" />
+    <Content Include="Views\OfficeDetails\Index.cshtml" />
+    <Content Include="Views\LogsDetails\Create.cshtml" />
+    <Content Include="Views\LogsDetails\Delete.cshtml" />
+    <Content Include="Views\LogsDetails\Details.cshtml" />
+    <Content Include="Views\LogsDetails\Edit.cshtml" />
+    <Content Include="Views\LogsDetails\Index.cshtml" />
+    <Content Include="Views\LogsDetails\TimeLine.cshtml" />
+    <Content Include="Views\Accounts\DashBoard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,117 @@
+﻿@model visa.Models.LogsDetails
+@using visa.Models
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    dbcontext db = new dbcontext();
+    var temp = db.EmailTemplates.ToList();
+    var student = db.PreForms.ToList();
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>LogsDetails</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.sid, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="stateDropDown" class="form-control" name="student">
+                    <option>Select Student</option>
+                    @foreach (var item in student)
+                    {
+                        <text>
+
+                            <option value="@item.id">(@item.SerialNo) - @item.StudentName</option>
+                        </text>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.sid, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="stateDropDown" class="form-control" name="title" onchange="getCityList()">
+                    <option>Select Template</option>
+                    @foreach (var item in temp)
+                    {
+                        <text>
+
+                            <option value="@item.id">@item.Title</option>
+                        </text>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="txtmessage" type="text" name="message" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sender, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script src="https://code.jquery.com/jquery-1.10.2.js"
+        integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo="
+        crossorigin="anonymous"></script>
+<script>
+    function getCityList() {
+        debugger;
+        var stateId = $("#stateDropDown").val();
+
+        $.ajax
+        ({
+            url: '/LogsDetails/GetCityList',
+            type: 'POST',
+            datatype: 'application/json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                stateId: +stateId
+            }),
+            success: function (result) {
+                debugger;
+                $.each($.parseJSON(result), function (i, city) {
+                    debugger;
+                    $("#txtmessage").val(city.Template)
+                   
+
+
+                })
+
+
+            },
+            error: function () {
+                alert("Whooaaa! Something went wrong..")
+            },
+        });
+    }
+</script>

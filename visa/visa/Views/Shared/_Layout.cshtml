@@ -158,10 +158,30 @@
                                     </ul>
                                 </li>
                                 <li class="parent">
+                                    <a href="#"><span>File Logs</span></a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            @Html.ActionLink("Add Logs", "Create", "LogsDetails")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Manage Logs", "Index", "LogosDetails")
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
                                     <a href="#"><span>Settings</span></a>
                                     <ul class="sub-menu">
                                         <li>
                                             @Html.ActionLink("Country List", "Index", "Countries")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Gst", "Index", "Gsts")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Email Template", "Index", "EmailTemplates")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Office Details", "Index", "OfficeDetails")
                                         </li>
                                        
                                     </ul>

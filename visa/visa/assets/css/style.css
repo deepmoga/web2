@@ -16,3 +16,31 @@
 .be-top-header .page-title {
     font-size: 14px !important;
 }
+.timeline-content {
+    position: relative;
+    background-color: #eee !important;
+    padding: 25px 30px 25px 28px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,.07);
+    min-height: 85px;
+}
+.be-booking-promo {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-radius: 3px;
+    background-color: #eee !important;
+    border-left: 3px solid #4285f4;
+    padding: 23px 30px 26px;
+    margin-bottom: 26px;
+}
